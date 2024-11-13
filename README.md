@@ -41,7 +41,7 @@ This setup works well for my needs, but it’s easy to modify in the code if nee
 
 No, the only terminal command that the script will ever execute is 'pacman -Qi'
 
-
+##
 Example output for `ph p`:
 
 ![image](https://github.com/user-attachments/assets/ba2e6d61-ec3b-4535-8456-a920c8758b37)
