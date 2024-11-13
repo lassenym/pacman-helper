@@ -39,4 +39,4 @@ This setup works well for my needs, but it’s easy to modify in the code if nee
 
 **Can this damage the system?**
 
-No, the only terminal command that the script will every execute is 'pacman -Qi'
+No, the only terminal command that the script will ever execute is 'pacman -Qi'
