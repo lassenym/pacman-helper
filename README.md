@@ -36,3 +36,7 @@ This setup works well for my needs, but it’s easy to modify in the code if nee
 - **system** — Core packages (e.g., `linux`, `sddm`, `amd-ucode`).
 - **program** — Applications (e.g., `chromium`, `konsole`, `steam`).
 - **library** — Libraries, often for personal coding (e.g., `python-cloudscraper`).
+
+**Can this damage the system?**
+
+No, the only terminal command that the script will every execute is 'pacman -Qi'
