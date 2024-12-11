@@ -6,7 +6,7 @@ A tool to categorize packages installed via the `pacman` package manager.
 1. Place `pacman_helper.py` in a directory of your choice.
 2. Create an alias for convenience, e.g., `alias ph='python path/to/pacman_helper.py'`.
 
-Running the script for the first time generates a `data.json` file in the same directory, organizing all packages into four categories:
+Running the script for the first time generates a `pkg_data.db` file in the same directory, organizing all packages into four categories:
 - **library**
 - **program**
 - **system**
