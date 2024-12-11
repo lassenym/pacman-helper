@@ -101,8 +101,7 @@ def db_print(cat):
     's': 'System Packages',
     'p': 'Programs',
     'l': 'Libraries',
-    'a': 'All Packages'
-    }
+    'a': 'All Packages'}
     conn, cursor = db_connect()
 
     if cat == 'a':
