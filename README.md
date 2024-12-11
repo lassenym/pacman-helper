@@ -12,7 +12,7 @@ Running the script for the first time generates a `pkg_data.db` file in the same
 - **system**
 - **dependency**
 
-Packages required by others are auto-categorized as **dependencies**; the rest require manual categorization. Once a package is sorted, it’s saved in `data.json` and won’t need re-sorting.
+Packages installed as dependencies are categorized as **dependencies**; the rest require manual categorization. Once a package is sorted, it’s saved in `pkg_data.db` and won’t need re-sorting.
 
 ### Commands
 
