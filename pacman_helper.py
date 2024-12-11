@@ -1,4 +1,5 @@
-import pyalpm, sqlite3, os, sys
+import sqlite3, os, sys
+import pyalpm
 
 RED = "\033[91m"
 GREEN = "\033[92m"
@@ -8,13 +9,8 @@ BLUE = "\033[34m"
 BLACK = "\033[90m"
 YELLOW = "\033[38;5;220m"
 RESET = "\033[0m"
-CATEGORIES = {
-    'd': 'Dependencies',
-    's': 'System Packages',
-    'p': 'Programs',
-    'l': 'Libraries',
-    'a': 'All Packages'
-}
+
+FILENAME = "pkg_data.db"
 
 def import_packages():
     handle = pyalpm.Handle("/", "/var/lib/pacman")
@@ -22,14 +18,14 @@ def import_packages():
     return db.pkgcache
 
 def db_connect():
-    conn = sqlite3.connect(os.path.join(os.path.dirname(os.path.abspath(__file__)), "pkg_data.db"))
+    conn = sqlite3.connect(os.path.join(os.path.dirname(os.path.abspath(__file__)), FILENAME))
     return conn, conn.cursor()
 
 def db_make():
     conn, cursor = db_connect()
 
     cursor.execute("""
-    CREATE TABLE IF NOT EXISTS packages (
+    CREATE TABLE packages (
         name TEXT,
         desc TEXT,
         flag CHAR(1)
@@ -100,11 +96,19 @@ def pkg_sort(name, desc):
     conn.close()
     
 def db_print(cat):
+    CATEGORIES = {
+    'd': 'Dependencies',
+    's': 'System Packages',
+    'p': 'Programs',
+    'l': 'Libraries',
+    'a': 'All Packages'
+    }
     conn, cursor = db_connect()
+
     if cat == 'a':
-        pkgs = cursor.execute("SELECT name, desc FROM packages").fetchall()
+        pkgs = cursor.execute("SELECT name, desc FROM packages ORDER BY name ASC").fetchall()
     elif cat in ('s', 'p', 'l', 'd'):
-        pkgs = cursor.execute("SELECT name, desc FROM packages WHERE flag = ?;", (cat)).fetchall()
+        pkgs = cursor.execute("SELECT name, desc FROM packages WHERE flag = ? ORDER BY name ASC;", (cat,)).fetchall()
     else:
         print(f"\n{RED}Error: Unknown category.{RESET}\n")
         return
@@ -114,18 +118,19 @@ def db_print(cat):
         print(f"{YELLOW}{CATEGORIES[cat]}:{RESET}\n{BEIGE}--------------------------------------------------------{RESET}")
         for pkg in pkgs:
             print(f"{BLUE}{pkg[0]}{RESET} {BLACK}({pkg[1]}){RESET}")
-        print(f"{BEIGE}--------------------------------------------------------{RESET}\n{GRAYB}{YELLOW}{len(pkgs)}{RESET}{GRAYB} packages in category '{YELLOW}{CATEGORIES[cat]}{RESET}{GRAYB}' installed{RESET}")
+        print(f"{BEIGE}--------------------------------------------------------{RESET}")
+        print(f"{GRAYB}{YELLOW}{len(pkgs)}{RESET}{GRAYB} packages in category '{YELLOW}{CATEGORIES[cat]}{RESET}{GRAYB}' installed{RESET}")
 
 
 if __name__ == "__main__":
     if len(sys.argv) > 1:
         db_print(sys.argv[1])
     else:
-        if not os.path.isfile(os.path.join(os.path.join(os.path.dirname(__file__)), 'pkg_data.db')):
+        if not os.path.isfile(os.path.join(os.path.join(os.path.dirname(__file__)), FILENAME)):
             db_make()
-            print("Data imported.")
+            print(f"{YELLOW}Data imported.{RESET}")
         else:
-            print("Updating db...")
+            print(f"{YELLOW}Updating db...{RESET}")
             db_update()
-            print("Done.")
+            print(f"{YELLOW}Done.{RESET}")
             db_sort()
