@@ -22,6 +22,7 @@ Assuming the alias `ph`:
 - `ph l` — Lists packages + descriptions in the **library** category.
 - `ph s` — Lists packages + descriptions in the **system** category.
 - `ph d` — Lists packages + descriptions in the **dependency** category.
+- `ph a` — Lists all packages + descriptions.
 
 ## FAQ
 
