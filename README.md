@@ -1,6 +1,10 @@
 # pacman-helper
 A tool to categorize packages installed via the `pacman` package manager.
 
+## Dependencies:
+- Python3
+- pyalpm
+
 ## Usage
 
 1. Place `pacman_helper.py` in a directory of your choice.
