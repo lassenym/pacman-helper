@@ -48,6 +48,7 @@ No, it only reads package-info, never changing anything on the system.
 Example output for `ph p`:
 
 ![image](https://github.com/user-attachments/assets/ba2e6d61-ec3b-4535-8456-a920c8758b37)
+Example output for `ph i`:
 
 ![image](https://github.com/user-attachments/assets/6d766d9a-8b60-450f-b483-6f2136bb6115)
 
