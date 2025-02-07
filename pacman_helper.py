@@ -1,4 +1,4 @@
-import sqlite3, os, sys, shutil, re
+import sqlite3, os, sys, shutil
 import pyalpm
 
 RED = "\033[91m"
